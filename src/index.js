@@ -11,6 +11,7 @@ submitBtn.addEventListener("click", function(event) {
   let tasks = document.getElementById('tasks');
   let li = document.createElement('li');
   let liBtn = document.createElement('button');
+  let editBtn = document.createElement('button');
 
   li.id = input;
   li.innerText = input;
@@ -18,6 +19,29 @@ submitBtn.addEventListener("click", function(event) {
   li.style.color = priority;
 
   liBtn.innerText = 'Delete';
+  editBtn.innerText = 'Edit';
+
+  editBtn.addEventListener("click", function(event){
+    let editInput = document.createElement('input');
+    let saveBtn = document.createElement('button')
+
+    editInput.type = 'text';
+    editInput.value = input;
+    editInput.id = 'edit';
+
+    saveBtn.innerText = 'Save';
+
+    saveBtn.addEventListener("click", function(){
+      newInput = editInput.value;
+      li.innerText = newInput;
+
+      li.append(liBtn);
+      li.append(editBtn);
+    });
+
+    li.append(saveBtn);
+    li.append(editInput);
+  });
 
   liBtn.addEventListener("click", function(event){
     event.preventDefault();
@@ -25,6 +49,7 @@ submitBtn.addEventListener("click", function(event) {
   });
 
   li.append(liBtn);
+  li.append(editBtn);
 
   if (priority === 'red'){
     let tasks = document.getElementById('h-tasks');
@@ -36,6 +61,7 @@ submitBtn.addEventListener("click", function(event) {
   }
   else {
     let tasks = document.getElementById('l-tasks');
+    tasks.append(li);
   }
 });
 
